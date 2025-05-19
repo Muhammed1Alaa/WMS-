@@ -5,6 +5,7 @@ import { Register } from './pages/Register';
 import { Dashboard } from './pages/Dashboard';
 import { Warehouses } from './pages/Warehouses';
 import { Inventory } from './pages/Inventory';
+import { Movements } from './pages/Movements';
 import { Layout } from './components/Layout';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
@@ -53,6 +54,16 @@ function App() {
               <ProtectedRoute>
                 <Layout>
                   <Inventory />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/movements"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <Movements />
                 </Layout>
               </ProtectedRoute>
             }
