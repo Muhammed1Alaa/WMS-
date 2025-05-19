@@ -1,27 +1,23 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.api.v1.api import api_router
+from app.routers import auth, warehouse, item, movement
 
-app = FastAPI(
-    title=settings.PROJECT_NAME,
-    version="1.0.0",
-    description="Warehouse Management System API",
-    openapi_url=f"{settings.API_V1_STR}/openapi.json"
-)
+app = FastAPI()
 
-# Set up CORS middleware
+# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.BACKEND_CORS_ORIGINS,
+    allow_origins=["*"],  # In production, replace with your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include API router
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(auth.router, prefix="/auth", tags=["auth"])
+app.include_router(warehouse.router, prefix="/warehouses", tags=["warehouses"])
+app.include_router(item.router, prefix="/items", tags=["items"])
+app.include_router(movement.router, prefix="/movements", tags=["movements"])
 
 @app.get("/")
 async def root():
-    return {"message": "Welcome to Warehouse Management System API"} 
+    return {"message": "WMS API is running"}
