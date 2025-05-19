@@ -7,7 +7,7 @@ interface LoginForm {
   password: string;
 }
 
-export const Login = () => {
+const LoginPage = () => {
   const { login } = useAuth();
   const [error, setError] = useState<string>('');
   const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();
@@ -88,4 +88,6 @@ export const Login = () => {
       </div>
     </div>
   );
-}; 
+};
+
+export default LoginPage; 
