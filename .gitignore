@@ -1,0 +1,3 @@
+.DS_Store
+node_modules/ # if you have Node.js projects
+*.log # if you want to exclude log files
